@@ -2,24 +2,29 @@ import logo from './logo.svg';
 import './App.css';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <div>
+            <header>
+                <h1>System doskonalenia umiejętności uczniów: Wirtualne Prace Domowe</h1>
+                <img src={logo} alt="logo"/>
+            </header>
+            <nav>
+                <ul>
+                    <li><a href="">Strona główna</a></li>
+                    <li><a href="">Zadania</a></li>
+                    <li><a href="">Uczniowie</a></li>
+                    <li><a href="">Rozwiązania</a></li>
+                </ul>
+            </nav>
+            <main>
+                <h2>Strona główna</h2>
+                <p>Lorem ipsum dolor sit amet...</p>
+            </main>
+            <footer>
+                Gall Anonim, s17738
+            </footer>
+        </div>
+    );
 }
 
 export default App;
