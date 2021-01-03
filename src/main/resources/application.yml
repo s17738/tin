@@ -1,1 +1,12 @@
-
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/wpd
+    username: wpd
+    password: wpd
+  jpa:
+    open-in-view: false
+    database: POSTGRESQL
+    properties:
+      hibernate:
+        jdbc.lob.non_contextual_creation: true
+        format_sql: false
