@@ -37,5 +37,6 @@ public class TaskSolution {
 
     @Nullable
     private Integer score;
+
 }
 
