@@ -24,12 +24,12 @@ create table users
 
 create table task_solutions
 (
+    id          uuid primary key,
     id_user     uuid      not null,
     id_task     uuid      not null,
     answer      text      not null,
     solved_date timestamp not null,
-    score       integer   null,
-    primary key (id_user, id_task)
+    score       integer   null
 );
 
 create table roles

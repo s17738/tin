@@ -10,5 +10,5 @@ insert into users (id, first_name, last_name, email, password, role_id)
 values ('99859862-5419-495d-8175-ab7cf403690c', 'Adam', 'Nowak', 'a.nowak@onet.pl', 'passwd', 'eefcb68d-1244-4361-ae17-3db58fc5770f'),
        ('b2f63343-4800-458e-9c78-a07b23bb3e87', 'Anna', 'Kowalska', 'a.kowalska@onet.pl', 'passwd', '38157c0d-18b3-44c4-8492-efe01e90838e');
 
-insert into task_solutions (id_user, id_task, answer, solved_date, score)
-values ('99859862-5419-495d-8175-ab7cf403690c', '0969990d-44fd-4b5e-836c-548998115180', '', current_timestamp + interval '1 day', null);
+insert into task_solutions (id, id_user, id_task, answer, solved_date, score)
+values (gen_random_uuid(), 'b2f63343-4800-458e-9c78-a07b23bb3e87', '0969990d-44fd-4b5e-836c-548998115180', '', current_timestamp + interval '1 day', null);

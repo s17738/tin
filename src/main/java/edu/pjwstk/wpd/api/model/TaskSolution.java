@@ -8,11 +8,15 @@ import lombok.Setter;
 import lombok.ToString;
 import org.springframework.lang.Nullable;
 
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import java.time.Instant;
+import java.util.UUID;
 
 import static lombok.AccessLevel.PACKAGE;
 
@@ -26,10 +30,18 @@ import static lombok.AccessLevel.PACKAGE;
 @AllArgsConstructor
 public class TaskSolution {
 
-    @EmbeddedId
+    @Id
     @ToString.Include
     @EqualsAndHashCode.Include
-    private TaskSolutionId id;
+    private UUID id;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_user")
+    private User user;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_task")
+    private Task task;
 
     private String answer;
 
@@ -37,5 +49,6 @@ public class TaskSolution {
 
     @Nullable
     private Integer score;
+
 }
 

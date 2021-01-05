@@ -1,5 +1,6 @@
 package edu.pjwstk.wpd.api.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -44,6 +45,7 @@ public class User {
 
     private String email;
 
+    @JsonIgnore
     private String password;
 
     @ManyToOne(fetch = LAZY)
