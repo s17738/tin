@@ -1,6 +1,9 @@
 import React from "react";
+import {getUsersListApiCall} from '../../api/usersApi'
+import {Link} from "react-router-dom";
 
 function StudentsList() {
+    const usersList = getUsersListApiCall()
     return (
         <section id="students" className="three">
             <div className="container">
@@ -15,30 +18,18 @@ function StudentsList() {
                         <th>Nazwisko</th>
                         <th>E-mail</th>
                     </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>Student 1</td>
-                        <td>Lorem</td>
-                        <td>student1@dummy-mail.com</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Student 2</td>
-                        <td>Ipsum</td>
-                        <td>student2@dummy-mail.com</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Student 3</td>
-                        <td>Dolor</td>
-                        <td>student2@dummy-mail.com</td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>Student 4</td>
-                        <td>Nunc</td>
-                        <td>student4@dummy-mail.com</td>
-                    </tr>
+                    {usersList.map(u => (
+                        <tr key={u.id}>
+                            <td>{u.firstName}</td>
+                            <td>{u.lastName}</td>
+                            <td>{u.email}</td>
+                            <td>
+                                <Link to={`users/details/${u.id}`} className="button">Szczegóły</Link>
+                                <Link to={`users/edit/${u.id}`} className="button">Edytuj</Link>
+                                <Link to={`users/delete/${u.id}`} className="button red">Usuń</Link>
+                            </td>
+                        </tr>
+                    ))}
                     </tbody>
                 </table>
             </div>
