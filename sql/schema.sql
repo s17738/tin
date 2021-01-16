@@ -7,7 +7,7 @@ create table tasks
 (
     id          uuid primary key,
     name        varchar(255) not null,
-    description text,
+    description text         not null,
     start_date  timestamp    not null,
     end_date    timestamp    not null
 );

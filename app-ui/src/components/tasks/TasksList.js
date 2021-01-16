@@ -1,6 +1,10 @@
 import React from "react";
+import {getTasksListApiCall} from '../../api/tasksApi'
+import {Link} from "react-router-dom";
+import { getFormattedDate } from '../../helpers/dateHelper'
 
 function TasksList() {
+    const tasksList = getTasksListApiCall()
     return (
         <section id="tasks" className="two">
             <div className="container">
@@ -11,47 +15,22 @@ function TasksList() {
                     <tbody>
                     <tr>
                         <th>Nazwa</th>
-                        <th>Opis</th>
                         <th>Data startu</th>
                         <th>Data zakończenia</th>
                         <th>Akcja</th>
                     </tr>
-                    <tr>
-                        <td>Zadanie 1</td>
-                        <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                        <td>11-12-2020</td>
-                        <td>11-01-20201</td>
-                        <td>
-                            <button className="button">Edytuj</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Zadanie 2</td>
-                        <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                        <td>11-01-20201</td>
-                        <td>11-01-20201</td>
-                        <td>
-                            <button className="button">Edytuj</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Zadanie 3</td>
-                        <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                        <td>11-01-20201</td>
-                        <td>11-01-20201</td>
-                        <td>
-                            <button className="button">Edytuj</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Zadanie 4</td>
-                        <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                        <td>11-7-2020</td>
-                        <td>11-01-20201</td>
-                        <td>
-                            <button className="button">Edytuj</button>
-                        </td>
-                    </tr>
+                    {tasksList.map(t => (
+                        <tr key={t.id}>
+                            <td>{t.name}</td>
+                            <td>{getFormattedDate(t.startDate)}</td>
+                            <td>{getFormattedDate(t.endDate)}</td>
+                            <td>
+                                <Link to={`tasks/details/${t.id}`} className="button">Szczegóły</Link>
+                                <Link to={`tasks/edit/${t.id}`} className="button">Edytuj</Link>
+                                <Link to={`tasks/delete/${t.id}`} className="button red">Usuń</Link>
+                            </td>
+                        </tr>
+                    ))}
                     </tbody>
                 </table>
             </div>

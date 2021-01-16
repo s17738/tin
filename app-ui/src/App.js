@@ -11,6 +11,7 @@ import MainContent from './components/fragments/MainContent'
 import TasksList from "./components/tasks/TasksList";
 import StudentsList from "./components/students/StudentsList";
 import SolutionsList from "./components/solutions/SolutionsList";
+import TasksDetails from "./components/tasks/TasksDetails";
 
 function App() {
     return (
@@ -19,8 +20,8 @@ function App() {
                 <Header/>
                 <main id="main">
                     <Switch>
-
                         <Route exact path="/tasks" component={TasksList}/>
+                        <Route exact path="/tasks/details/:taskId" component={TasksDetails}/>
                         <Route exact path="/students" component={StudentsList}/>
                         <Route exact path="/solutions" component={SolutionsList}/>
                         <Route path="/" component={MainContent}/>
