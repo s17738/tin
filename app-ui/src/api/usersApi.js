@@ -1,5 +1,3 @@
-import {usersList} from './usersApiMockData'
-
 const baseUrl = 'http://localhost:8080/api'
 
 export function getUsersList() {
@@ -7,7 +5,7 @@ export function getUsersList() {
 }
 
 export function getUserById(id) {
-    return usersList.find(t => t.id === id);
+    return fetch(baseUrl + '/users/' + id)
 }
 
 export function deleteUserById(id) {

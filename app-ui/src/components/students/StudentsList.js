@@ -9,7 +9,7 @@ class StudentsList extends React.Component {
         this.state = {
             error: null,
             isLoaded: false,
-            users: [],
+            students: [],
         }
     }
 
@@ -19,7 +19,7 @@ class StudentsList extends React.Component {
             .then((data) => {
                     this.setState({
                         isLoaded: true,
-                        users: data
+                        students: data
                     });
                 },
                 (error) => {
@@ -36,10 +36,8 @@ class StudentsList extends React.Component {
     }
 
     handleDelete(id) {
-        console.log(id);
         deleteUserById(id)
             .then(res => res.text())
-            .then(res => console.log(res))
     }
 
     render() {
@@ -57,7 +55,7 @@ class StudentsList extends React.Component {
                             <th>Nazwisko</th>
                             <th>E-mail</th>
                         </tr>
-                        {this.state.users.map(u => (
+                        {this.state.students.map(u => (
                             <tr key={u.id}>
                                 <td>{u.firstName}</td>
                                 <td>{u.lastName}</td>
