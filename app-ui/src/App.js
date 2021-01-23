@@ -12,6 +12,8 @@ import TasksList from "./components/tasks/TasksList";
 import StudentsList from "./components/students/StudentsList";
 import SolutionsList from "./components/solutions/SolutionsList";
 import TasksDetails from "./components/tasks/TasksDetails";
+import StudentDetails from "./components/students/StudentDetails";
+import StudentForm from "./components/students/StudentForm";
 
 function App() {
     return (
@@ -23,6 +25,8 @@ function App() {
                         <Route exact path="/tasks" component={TasksList}/>
                         <Route exact path="/tasks/details/:taskId" component={TasksDetails}/>
                         <Route exact path="/students" component={StudentsList}/>
+                        <Route exact path="/students/new-student" component={StudentForm}/>
+                        <Route exact path="/students/details/:studentId" component={StudentDetails}/>
                         <Route exact path="/solutions" component={SolutionsList}/>
                         <Route path="/" component={MainContent}/>
                     </Switch>
