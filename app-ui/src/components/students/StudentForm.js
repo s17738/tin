@@ -1,13 +1,15 @@
 import React from "react"
 import {Link, Redirect} from "react-router-dom"
-import {addUser} from "../../api/usersApi";
+import {addUser, getUserById, updateUser} from "../../api/usersApi";
 
 class StudentForm extends React.Component {
     constructor(props) {
         super(props)
+        let {studentId} = props.match.params
         this.state = {
             error: null,
             isSaved: false,
+            studentId: studentId,
             newStudentId: null,
             redirect: null,
             firstName: '',
@@ -19,9 +21,40 @@ class StudentForm extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
+    componentDidMount() {
+        if (this.state.studentId) {
+            this.fetchDetails()
+        }
+    }
+
+    fetchDetails = () => {
+        getUserById(this.state.studentId)
+            .then(res => res.json())
+            .then(
+                (data) => {
+                    if (!data.message) {
+                        this.setState({
+                            firstName: data.firstName,
+                            lastName: data.lastName,
+                            email: data.email,
+                            message: null,
+                        })
+                    }
+                    this.setState({
+                        isLoaded: true,
+                    })
+                },
+                (error) => {
+                    this.setState({
+                        isLoaded: true,
+                        error
+                    })
+                })
+    }
+
     handleSubmit(event) {
         event.preventDefault();
-        addUser({
+        let user = {
             firstName: this.state.firstName,
             lastName: this.state.lastName,
             email: this.state.email,
@@ -30,7 +63,35 @@ class StudentForm extends React.Component {
                 id: '38157c0d-18b3-44c4-8492-efe01e90838e', //todo select role from dropdown in case of admin privilege
                 name: 'student'
             }
-        }).then(resp => resp.json())
+        }
+        if (this.state.studentId) {
+            this.update(user)
+        } else {
+            this.save(user)
+        }
+    }
+
+    update(user) {
+        updateUser(this.state.studentId, user)
+            .then(resp => resp.json())
+            .then((data) => {
+                    this.setState({
+                        isSaved: true,
+                        redirect: "/students/details/" + this.state.studentId
+                    });
+                },
+                (error) => {
+                    this.setState({
+                        isLoaded: true,
+                        error
+                    });
+                }
+            )
+    }
+
+    save(user) {
+        addUser(user)
+            .then(resp => resp.json())
             .then((data) => {
                     this.setState({
                         isSaved: true,

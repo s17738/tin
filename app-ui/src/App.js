@@ -27,6 +27,7 @@ function App() {
                         <Route exact path="/tasks/details/:taskId" component={TasksDetails}/>
                         <Route exact path="/students" component={StudentsList}/>
                         <Route exact path="/students/new-student" component={StudentForm}/>
+                        <Route exact path="/students/edit/:studentId" component={StudentForm}/>
                         <Route exact path="/students/details/:studentId" component={StudentDetails}/>
                         <Route exact path="/students/delete/:studentId" component={StudentDelete}/>
                         <Route exact path="/solutions" component={SolutionsList}/>
