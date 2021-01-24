@@ -1,6 +1,7 @@
 import React from "react";
 import {Link} from "react-router-dom";
 import {getUsersList, deleteUserById} from "../../api/usersApi";
+import StudentsListTable from "./StudentsListTable";
 
 class StudentsList extends React.Component {
     constructor(props) {
@@ -41,34 +42,23 @@ class StudentsList extends React.Component {
     }
 
     render() {
+        const {error, isLoaded, students} = this.state
+        let content;
+
+        if (error) {
+            content = <p>Błąd: {error.message}</p>
+        } else if (!isLoaded) {
+            content = <p>Ładowanie danych...</p>
+        } else {
+            content = <StudentsListTable studentsList={students}/>
+        }
         return (
             <section id="students" className="three">
                 <div className="container">
                     <header>
                         <h2>Studenci</h2>
                     </header>
-                    <table>
-                        <tbody>
-                        <tr>
-                            <th>ID</th>
-                            <th>Imię</th>
-                            <th>Nazwisko</th>
-                            <th>E-mail</th>
-                        </tr>
-                        {this.state.students.map(u => (
-                            <tr key={u.id}>
-                                <td>{u.firstName}</td>
-                                <td>{u.lastName}</td>
-                                <td>{u.email}</td>
-                                <td>
-                                    <Link to={`students/details/${u.id}`} className="button">Szczegóły</Link>
-                                    <Link to={`students/edit/${u.id}`} className="button">Edytuj</Link>
-                                    <Link to={`users/delete/${u.id}`} className="button red">Usuń</Link>
-                                </td>
-                            </tr>
-                        ))}
-                        </tbody>
-                    </table>
+                    {content}
                     <Link to={`students/new-student`} className="button">Dodaj studenta</Link>
                 </div>
             </section>
