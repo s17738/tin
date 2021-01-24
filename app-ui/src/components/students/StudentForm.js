@@ -1,5 +1,5 @@
 import React from "react"
-import {Link} from "react-router-dom"
+import {Link, Redirect} from "react-router-dom"
 import {addUser} from "../../api/usersApi";
 
 class StudentForm extends React.Component {
@@ -9,6 +9,7 @@ class StudentForm extends React.Component {
             error: null,
             isSaved: false,
             newStudentId: null,
+            redirect: null,
             firstName: '',
             lastName: '',
             email: '',
@@ -26,22 +27,24 @@ class StudentForm extends React.Component {
             email: this.state.email,
             password: this.state.password,
             role: {
-                id: '38157c0d-18b3-44c4-8492-efe01e90838e',
+                id: '38157c0d-18b3-44c4-8492-efe01e90838e', //todo select role from dropdown in case of admin privilege
                 name: 'student'
             }
-        }).then((data) => {
-                this.setState({
-                    isSaved: true,
-                    newStudentId: data.id
-                });
-            },
-            (error) => {
-                this.setState({
-                    isLoaded: true,
-                    error
-                });
-            }
-        )
+        }).then(resp => resp.json())
+            .then((data) => {
+                    this.setState({
+                        isSaved: true,
+                        newStudentId: data.id,
+                        redirect: "/students/details/" + data.id
+                    });
+                },
+                (error) => {
+                    this.setState({
+                        isLoaded: true,
+                        error
+                    });
+                }
+            )
     }
 
     handleChange(event) {
@@ -51,6 +54,10 @@ class StudentForm extends React.Component {
     }
 
     render() {
+        const {redirect} = this.state
+        if (redirect) {
+            return <Redirect to={redirect}/>
+        }
         return (
             <section id="students" className="three">
                 <div className="container">
