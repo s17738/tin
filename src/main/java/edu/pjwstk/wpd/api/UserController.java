@@ -43,10 +43,10 @@ class UserController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public User createUser(@Valid @RequestBody UserWithPasswordDto userDto) {
+    public UserDto createUser(@Valid @RequestBody UserWithPasswordDto userDto) {
         User user = userMapper.mapToEntity(userDto);
         user.setId(UUID.randomUUID());
-        return userRepository.save(user);
+        return userMapper.mapToDto(userRepository.save(user));
     }
 
     @PutMapping("/{userId}")

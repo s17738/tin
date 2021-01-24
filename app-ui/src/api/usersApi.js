@@ -11,3 +11,14 @@ export function getUserById(id) {
 export function deleteUserById(id) {
     return fetch(baseUrl + '/users/' + id, {method: 'DELETE'})
 }
+
+export function addUser(user) {
+    return fetch(baseUrl + '/users', {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(user)
+    })
+}
