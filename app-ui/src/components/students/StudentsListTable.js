@@ -20,7 +20,7 @@ function StudentsListTable(props) {
                     <td>
                         <Link to={`students/details/${u.id}`} className="button">Szczegóły</Link>
                         <Link to={`students/edit/${u.id}`} className="button">Edytuj</Link>
-                        <Link to={`users/delete/${u.id}`} className="button red">Usuń</Link>
+                        <Link to={`students/delete/${u.id}`} className="button red">Usuń</Link>
                     </td>
                 </tr>
             ))}

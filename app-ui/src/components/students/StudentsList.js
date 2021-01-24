@@ -1,12 +1,11 @@
 import React from "react";
 import {Link} from "react-router-dom";
-import {getUsersList, deleteUserById} from "../../api/usersApi";
+import {getUsersList} from "../../api/usersApi";
 import StudentsListTable from "./StudentsListTable";
 
 class StudentsList extends React.Component {
     constructor(props) {
         super(props)
-        this.handleDelete = this.handleDelete.bind(this);
         this.state = {
             error: null,
             isLoaded: false,
@@ -34,11 +33,6 @@ class StudentsList extends React.Component {
 
     componentDidMount() {
         this.fetchList()
-    }
-
-    handleDelete(id) {
-        deleteUserById(id)
-            .then(res => res.text())
     }
 
     render() {
