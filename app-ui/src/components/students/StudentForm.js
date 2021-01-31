@@ -125,19 +125,23 @@ class StudentForm extends React.Component {
                     <h2>Nowy student</h2>
                     <form className="form" onSubmit={this.handleSubmit}>
                         <label htmlFor="firstName">Imię:<abbr title="required" aria-label="required">*</abbr></label>
-                        <input onChange={this.handleChange} type="text" name="firstName" id="firstName" value={this.state.firstName}/>
+                        <input onChange={this.handleChange} type="text" name="firstName" id="firstName"
+                               value={this.state.firstName}/>
                         <span id="errorFirstName" className="errors-text"></span>
 
                         <label htmlFor="lastName">Nazwisko:<abbr title="required" aria-label="required">*</abbr></label>
-                        <input onChange={this.handleChange} type="text" name="lastName" id="lastName" value={this.state.lastName}/>
+                        <input onChange={this.handleChange} type="text" name="lastName" id="lastName"
+                               value={this.state.lastName}/>
                         <span id="errorLastName" className="errors-text"></span>
 
                         <label htmlFor="email">E-mail:<abbr title="required" aria-label="required">*</abbr></label>
-                        <input onChange={this.handleChange} type="email" name="email" id="email" value={this.state.email}/>
+                        <input onChange={this.handleChange} type="email" name="email" id="email"
+                               value={this.state.email}/>
                         <span id="errorEmail" className="errors-text"></span>
 
                         <label htmlFor="password">Hasło:<abbr title="required" aria-label="required">*</abbr></label>
-                        <input onChange={this.handleChange} type="password" name="password" id="password" value={this.state.password}/>
+                        <input onChange={this.handleChange} type="password" name="password" id="password"
+                               value={this.state.password}/>
                         <span id="errorEmail" className="errors-text"></span>
 
                         <div className="form-buttons">

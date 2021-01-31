@@ -50,13 +50,14 @@ class UserController {
     }
 
     @PutMapping("/{userId}")
-    public void createUser(@PathVariable UUID userId, @Valid @RequestBody UserWithPasswordDto userDto) {
+    public UUID updateUser(@PathVariable UUID userId, @Valid @RequestBody UserWithPasswordDto userDto) {
         if (!userRepository.existsById(userId)) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");
         }
         User user = userMapper.mapToEntity(userDto);
         user.setId(userId);
         userRepository.save(user);
+        return user.getId();
     }
 
     @DeleteMapping("/{userId}")
