@@ -8,7 +8,6 @@ import java.util.UUID;
 
 public interface TaskSolutionRepository extends JpaRepository<TaskSolution, UUID> {
 
-    @Override
     @EntityGraph(attributePaths = {"user", "user.role", "task"})
-    List<TaskSolution> findAll();
+    List<TaskSolution> findAllByTask(Task task);
 }

@@ -1,6 +1,7 @@
 import React from "react";
 import {getTaskById} from '../../api/tasksApi'
 import TaskDetailsData from "./TaskDetailsData";
+import SolutionsList from "../solutions/SolutionsList";
 
 class TasksDetails extends React.Component {
     constructor(props) {
@@ -47,7 +48,7 @@ class TasksDetails extends React.Component {
     }
 
     render() {
-        const {task, error, isLoaded, message} = this.state
+        const {task, taskId, error, isLoaded, message} = this.state
         let content;
 
         if (error) {
@@ -60,11 +61,14 @@ class TasksDetails extends React.Component {
             content = <TaskDetailsData taskData={task}/>
         }
         return (
-            <section id="tasks" className="two">
-                <div className="container">
-                    {content}
-                </div>
-            </section>
+            <div>
+                <section id="tasks" className="two">
+                    <div className="container">
+                        {content}
+                    </div>
+                </section>
+                <SolutionsList taskId={taskId}/>
+            </div>
         );
     }
 }

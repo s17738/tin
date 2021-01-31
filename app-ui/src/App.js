@@ -10,7 +10,6 @@ import Header from './components/fragments/Header'
 import MainContent from './components/fragments/MainContent'
 import TasksList from "./components/tasks/TasksList";
 import StudentsList from "./components/students/StudentsList";
-import SolutionsList from "./components/solutions/SolutionsList";
 import TasksDetails from "./components/tasks/TasksDetails";
 import StudentDetails from "./components/students/StudentDetails";
 import StudentForm from "./components/students/StudentForm";
@@ -36,8 +35,6 @@ function App() {
                         <Route exact path="/students/edit/:studentId" component={StudentForm}/>
                         <Route exact path="/students/details/:studentId" component={StudentDetails}/>
                         <Route exact path="/students/delete/:studentId" component={StudentDelete}/>
-
-                        <Route exact path="/solutions" component={SolutionsList}/>
                         <Route path="/" component={MainContent}/>
                     </Switch>
                 </main>

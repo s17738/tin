@@ -60,7 +60,7 @@ class StudentDetails extends React.Component {
             content = <StudentDetailsData studentData={student}/>
         }
         return (
-            <section id="students" className="three">
+            <section id="students" className="two">
                 <div className="container">
                     {content}
                 </div>

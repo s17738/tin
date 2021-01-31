@@ -1,55 +1,64 @@
 import React from "react";
+import {getSolutionsListByTaskId} from "../../api/tasksApi";
+import {Link} from "react-router-dom";
+import SolutionsListTable from "./SolutionsListTable";
 
-function SolutionsList() {
-    return (
-        <section id="solutions" className="four">
-            <div className="container">
-                <header>
-                    <h2>Rozwiązania</h2>
-                </header>
-                <table>
-                    <tbody>
-                    <tr>
-                        <th>Zadanie</th>
-                        <th>Student</th>
-                        <th>Odpowiedź</th>
-                        <th>Data rozwiązania</th>
-                        <th>Wynik</th>
-                    </tr>
-                    <tr>
-                        <td>Zadanie 1</td>
-                        <td>Student 1</td>
-                        <td>Vitae natoque dictum etiam semper</td>
-                        <td>11-01-20201</td>
-                        <td>0</td>
-                    </tr>
-                    <tr>
-                        <td>Zadanie 2</td>
-                        <td>Student 1</td>
-                        <td>Vitae natoque dictum etiam semper</td>
-                        <td>11-01-20201</td>
-                        <td>0</td>
-                    </tr>
-                    <tr>
-                        <td>Zadanie 3</td>
-                        <td>Student 1</td>
-                        <td>Vitae natoque dictum etiam semper</td>
-                        <td>11-01-20201</td>
-                        <td>0</td>
-                    </tr>
-                    <tr>
-                        <td>Zadanie 4</td>
-                        <td>Student 1</td>
-                        <td>Vitae natoque dictum etiam semper</td>
-                        <td>11-01-20201</td>
-                        <td>0</td>
-                    </tr>
-                    </tbody>
-                </table>
+class SolutionsList extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            error: null,
+            taskId: props.taskId,
+            isLoaded: false,
+            solutions: []
+        }
+    }
 
-            </div>
-        </section>
-    );
+    fetchList = () => {
+        getSolutionsListByTaskId(this.state.taskId)
+            .then(res => res.json())
+            .then((data) => {
+                    this.setState({
+                        isLoaded: true,
+                        solutions: data
+                    });
+                },
+                (error) => {
+                    this.setState({
+                        isLoaded: true,
+                        error
+                    });
+                }
+            )
+    }
+
+    componentDidMount() {
+        this.fetchList()
+    }
+
+    render() {
+        const {taskId, error, isLoaded, solutions} = this.state
+        let content;
+
+        if (error) {
+            content = <p>Błąd: {error.message}</p>
+        } else if (!isLoaded) {
+            content = <p>Ładowanie danych...</p>
+        } else {
+            content = <SolutionsListTable solutionsList={solutions}/>
+        }
+        return (
+            <section id="solutions" className="four">
+                <div className="container">
+                    <header>
+                        <h2>Rozwiązania</h2>
+                    </header>
+                    {content}
+                    <Link to={`tasks/${taskId}/new-solution`} className="button">Dodaj rozwiązanie</Link>
+                </div>
+            </section>
+        );
+    }
 }
 
 export default SolutionsList

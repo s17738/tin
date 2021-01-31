@@ -37,3 +37,7 @@ export function updateTask(id, task) {
         body: JSON.stringify(task)
     })
 }
+
+export function getSolutionsListByTaskId(taskId) {
+    return fetch(baseUrl + '/' + taskId + '/solutions')
+}

@@ -9,11 +9,10 @@ function TaskDetailsData(props) {
             <header>
                 <h2>{task.name}</h2>
             </header>
-            <p>Opis: {task.description}</p>
-            <p>Data startu zadania: {getFormattedDate(task.startDate)} Data zakończenia
-                zadania: {getFormattedDate(task.endDate)}</p>
+            <p><b>Opis:</b> {task.description}</p>
+            <p><b>Data startu zadania:</b> {getFormattedDate(task.startDate)}</p>
+            <p><b>Data zakończenia zadania:</b> {getFormattedDate(task.endDate)}</p>
             <Link to={`/tasks`} className="button">Lista zadań</Link>
-            <Link to={`/tasks/${task.id}/new-solution`} className="button">Rozwiąż zadanie</Link>
         </React.Fragment>
     )
 }

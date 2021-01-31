@@ -8,9 +8,9 @@ function StudentDetailsData(props) {
             <header>
                 <h2>{student.firstName} {student.lastName}</h2>
             </header>
-            <p>ID: {student.id}</p>
-            <p>E-mail: {student.email}</p>
-            <p>Rola: {student.role.name}</p>
+            <p><b>ID:</b> {student.id}</p>
+            <p><b>E-mail:</b> {student.email}</p>
+            <p><b>Rola:</b> {student.role.name}</p>
             <Link to={`/students`} className="button">Lista studentów</Link>
         </React.Fragment>
     )
