@@ -124,24 +124,24 @@ class StudentForm extends React.Component {
                 <div className="container">
                     <h2>Nowy student</h2>
                     <form className="form" onSubmit={this.handleSubmit}>
-                        <label htmlFor="firstName">Imię:<abbr title="required" aria-label="required">*</abbr></label>
+                        <label htmlFor="firstName">Imię:<abbr title="wymagane" aria-label="required">*</abbr></label>
                         <input onChange={this.handleChange} type="text" name="firstName" id="firstName"
-                               value={this.state.firstName}/>
+                               value={this.state.firstName} required minLength="2" maxLength="200"/>
                         <span id="errorFirstName" className="errors-text"></span>
 
-                        <label htmlFor="lastName">Nazwisko:<abbr title="required" aria-label="required">*</abbr></label>
+                        <label htmlFor="lastName">Nazwisko:<abbr title="wymagane" aria-label="required">*</abbr></label>
                         <input onChange={this.handleChange} type="text" name="lastName" id="lastName"
-                               value={this.state.lastName}/>
+                               value={this.state.lastName} required minLength="2" maxLength="200"/>
                         <span id="errorLastName" className="errors-text"></span>
 
-                        <label htmlFor="email">E-mail:<abbr title="required" aria-label="required">*</abbr></label>
+                        <label htmlFor="email">E-mail:<abbr title="wymagane" aria-label="required">*</abbr></label>
                         <input onChange={this.handleChange} type="email" name="email" id="email"
-                               value={this.state.email}/>
+                               value={this.state.email} required minLength="3" maxLength="300"/>
                         <span id="errorEmail" className="errors-text"></span>
 
-                        <label htmlFor="password">Hasło:<abbr title="required" aria-label="required">*</abbr></label>
+                        <label htmlFor="password">Hasło:<abbr title="wymagane" aria-label="required">*</abbr></label>
                         <input onChange={this.handleChange} type="password" name="password" id="password"
-                               value={this.state.password}/>
+                               value={this.state.password} required minLength="8" maxLength="300"/>
                         <span id="errorEmail" className="errors-text"></span>
 
                         <div className="form-buttons">

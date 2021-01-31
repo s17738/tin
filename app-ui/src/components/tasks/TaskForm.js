@@ -122,25 +122,25 @@ class TaskForm extends React.Component {
                 <div className="container">
                     <h2>Zadanie</h2>
                     <form className="form" onSubmit={this.handleSubmit}>
-                        <label htmlFor="name">Nazwa:<abbr title="required" aria-label="required">*</abbr></label>
+                        <label htmlFor="name">Nazwa:<abbr title="wymagane" aria-label="required">*</abbr></label>
                         <input onChange={this.handleChange} type="text" name="name" id="name"
-                               value={this.state.name}/>
+                               value={this.state.name} required minLength="3" maxLength="300"/>
                         <span id="errorName" className="errors-text"></span>
 
-                        <label htmlFor="description">Opis:<abbr title="required" aria-label="required">*</abbr></label>
-                        <input onChange={this.handleChange} type="text" name="description" id="description"
-                               value={this.state.description}/>
+                        <label htmlFor="description">Opis:<abbr title="wymagane" aria-label="required">*</abbr></label>
+                        <textarea onChange={this.handleChange} name="description" id="description"
+                               value={this.state.description} required/>
                         <span id="errorDescription" className="errors-text"></span>
 
-                        <label htmlFor="startDate">Data startu:<abbr title="required"
+                        <label htmlFor="startDate">Data startu:<abbr title="wymagane"
                                                                      aria-label="required">*</abbr></label>
                         <input onChange={this.handleChange} type="datetime-local" name="startDate" id="startDate"
-                               value={this.state.startDate}/>
+                               value={this.state.startDate} required/>
                         <span id="errorStartDate" className="errors-text"></span>
 
-                        <label htmlFor="endDate">Data zakończenia:<abbr title="required" aria-label="required">*</abbr></label>
+                        <label htmlFor="endDate">Data zakończenia:<abbr title="wymagane" aria-label="required">*</abbr></label>
                         <input onChange={this.handleChange} type="datetime-local" name="endDate" id="endDate"
-                               value={this.state.endDate}/>
+                               value={this.state.endDate} required/>
                         <span id="errorEndDate" className="errors-text"></span>
 
                         <div className="form-buttons">
