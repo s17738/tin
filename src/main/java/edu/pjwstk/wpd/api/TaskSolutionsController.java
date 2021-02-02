@@ -2,18 +2,16 @@ package edu.pjwstk.wpd.api;
 
 import edu.pjwstk.wpd.api.dto.TaskSolutionDto;
 import edu.pjwstk.wpd.api.dto.TaskSolutionMapper;
-import edu.pjwstk.wpd.api.model.Task;
-import edu.pjwstk.wpd.api.model.TaskRepository;
-import edu.pjwstk.wpd.api.model.TaskSolution;
-import edu.pjwstk.wpd.api.model.TaskSolutionRepository;
+import edu.pjwstk.wpd.api.dto.TaskSolveDto;
+import edu.pjwstk.wpd.api.model.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.validation.Valid;
+import java.time.Clock;
+import java.time.Instant;
 import java.util.List;
 import java.util.UUID;
 
@@ -25,14 +23,33 @@ class TaskSolutionsController {
     private final TaskRepository taskRepository;
     private final TaskSolutionRepository taskSolutionRepository;
     private final TaskSolutionMapper taskSolutionMapper;
+    private final UserRepository userRepository;
 
 
     @GetMapping()
-    public List<TaskSolutionDto> getTask(@PathVariable UUID taskId) {
+    public List<TaskSolutionDto> getSolution(@PathVariable UUID taskId) {
         Task task = taskRepository.findById(taskId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Task not found"));
         return taskSolutionMapper.mapToDto(
                 taskSolutionRepository.findAllByTask(task)
         );
+    }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public TaskSolutionDto createSolution(@PathVariable UUID taskId, @Valid @RequestBody TaskSolveDto taskSolveDto) {
+        Task task = taskRepository.findById(taskId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Task not found"));
+
+        TaskSolution taskSolution = taskSolutionRepository.save(new TaskSolution(
+                UUID.randomUUID(), getTempUser(), task, taskSolveDto.getAnswer(), Instant.now(Clock.systemUTC()), null)
+        );
+
+        return taskSolutionMapper.mapToDto(taskSolution);
+    }
+
+    private User getTempUser() {
+        //todo replace with session user
+        return userRepository.findAll().stream().findFirst().get();
     }
 }

@@ -54,7 +54,7 @@ class SolutionsList extends React.Component {
                         <h2>Rozwiązania</h2>
                     </header>
                     {content}
-                    <Link to={`tasks/${taskId}/new-solution`} className="button">Dodaj rozwiązanie</Link>
+                    <Link to={`/tasks/details/${taskId}/new-solution`} className="button">Dodaj rozwiązanie</Link>
                 </div>
             </section>
         );

@@ -1,6 +1,5 @@
 import React from 'react';
 import {getFormattedDate} from "../../helpers/dateHelper";
-import {Link} from "react-router-dom";
 
 function SolutionsListTable(props) {
     const solutions = props.solutionsList

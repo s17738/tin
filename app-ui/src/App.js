@@ -16,6 +16,7 @@ import StudentForm from "./components/students/StudentForm";
 import StudentDelete from "./components/students/StudentDelete";
 import TaskForm from "./components/tasks/TaskForm";
 import TaskDelete from "./components/tasks/TaskDelete";
+import SolutionForm from "./components/solutions/SolutionForm";
 
 function App() {
     return (
@@ -29,6 +30,8 @@ function App() {
                         <Route exact path="/tasks/new-task" component={TaskForm}/>
                         <Route exact path="/tasks/edit/:taskId" component={TaskForm}/>
                         <Route exact path="/tasks/delete/:taskId" component={TaskDelete}/>
+                        <Route exact path="/tasks/details/:taskId/new-solution" component={SolutionForm}/>
+                        <Route exact path="/tasks/details/:taskId/edit-solution/:solutionId" component={SolutionForm}/>
 
                         <Route exact path="/students" component={StudentsList}/>
                         <Route exact path="/students/new-student" component={StudentForm}/>

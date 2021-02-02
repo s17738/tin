@@ -41,3 +41,29 @@ export function updateTask(id, task) {
 export function getSolutionsListByTaskId(taskId) {
     return fetch(baseUrl + '/' + taskId + '/solutions')
 }
+
+export function getSolutionByTaskId(taskId, solutionId) {
+    return fetch(baseUrl + '/' + taskId + '/solutions/' + solutionId)
+}
+
+export function addSolution(taskId, solution) {
+    return fetch(baseUrl + '/' + taskId + '/solutions', {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(solution)
+    })
+}
+
+export function updateSolution(taskId, solutionId, solution) {
+    return fetch(baseUrl + '/' + taskId + '/solutions/' + solutionId, {
+        method: 'PUT',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(solution)
+    })
+}
