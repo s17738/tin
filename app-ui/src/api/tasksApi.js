@@ -67,3 +67,7 @@ export function updateSolution(taskId, solutionId, solution) {
         body: JSON.stringify(solution)
     })
 }
+
+export function deleteSolutionById(taskId, solutionId) {
+    return fetch(baseUrl + '/' + taskId + '/solutions/' + solutionId, {method: 'DELETE'})
+}

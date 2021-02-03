@@ -45,7 +45,7 @@ class SolutionsList extends React.Component {
         } else if (!isLoaded) {
             content = <p>Ładowanie danych...</p>
         } else {
-            content = <SolutionsListTable solutionsList={solutions}/>
+            content = <SolutionsListTable solutionsList={solutions} taskId={taskId}/>
         }
         return (
             <section id="solutions" className="four">

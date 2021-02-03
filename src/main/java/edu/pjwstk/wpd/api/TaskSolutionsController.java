@@ -28,8 +28,7 @@ class TaskSolutionsController {
 
     @GetMapping()
     public List<TaskSolutionDto> getSolution(@PathVariable UUID taskId) {
-        Task task = taskRepository.findById(taskId)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Task not found"));
+        Task task = getTask(taskId);
         return taskSolutionMapper.mapToDto(
                 taskSolutionRepository.findAllByTask(task)
         );
@@ -38,9 +37,7 @@ class TaskSolutionsController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public TaskSolutionDto createSolution(@PathVariable UUID taskId, @Valid @RequestBody TaskSolveDto taskSolveDto) {
-        Task task = taskRepository.findById(taskId)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Task not found"));
-
+        Task task = getTask(taskId);
         TaskSolution taskSolution = taskSolutionRepository.save(new TaskSolution(
                 UUID.randomUUID(), getTempUser(), task, taskSolveDto.getAnswer(), Instant.now(Clock.systemUTC()), null)
         );
@@ -51,5 +48,17 @@ class TaskSolutionsController {
     private User getTempUser() {
         //todo replace with session user
         return userRepository.findAll().stream().findFirst().get();
+    }
+
+    @DeleteMapping("/{solutionId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteSolution(@PathVariable UUID taskId, @PathVariable UUID solutionId) {
+        getTask(taskId);
+        taskSolutionRepository.deleteById(solutionId);
+    }
+
+    private Task getTask(UUID taskId) {
+        return taskRepository.findById(taskId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Task not found"));
     }
 }
