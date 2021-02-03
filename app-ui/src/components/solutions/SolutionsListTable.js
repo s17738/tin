@@ -19,7 +19,8 @@ function SolutionsListTable(props) {
                     <td>{t.answer}</td>
                     <td>{getFormattedDate(t.solvedDate)}</td>
                     <td>{t.score}</td>
-                    <td><Link to={`/tasks/details/${taskId}/delete-solution/${t.id}`} className="button red" disabled>Usuń</Link></td>
+                    <td><Link to={`/tasks/details/${taskId}/delete-solution/${t.id}`}
+                              className={t.score ? 'button red disabled-link' : 'button red'}>Usuń</Link></td>
                 </tr>
             ))}
             </tbody>

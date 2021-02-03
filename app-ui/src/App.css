@@ -364,6 +364,12 @@ button:active,
     background-color: #7eaeac;
 }
 
+a[disabled],
+.disabled-link {
+    pointer-events: none;
+    background-color: #737373;
+}
+
 .item {
     box-shadow: 0 0.05em 0.15em 0 rgba(0, 0, 0, 0.05);
     margin-bottom: 40px;

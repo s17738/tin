@@ -54,6 +54,11 @@ class TaskSolutionsController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteSolution(@PathVariable UUID taskId, @PathVariable UUID solutionId) {
         getTask(taskId);
+        TaskSolution taskSolution = taskSolutionRepository.findById(solutionId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Solution not found"));
+        if (taskSolution.getScore() != null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Cannot delete solution with score");
+        }
         taskSolutionRepository.deleteById(solutionId);
     }
 
