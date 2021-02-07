@@ -7,7 +7,6 @@ import {
 } from 'react-router-dom'
 import Footer from './components/fragments/Footer'
 import Header from './components/fragments/Header'
-import MainContent from './components/fragments/MainContent'
 import TasksList from "./components/tasks/TasksList";
 import StudentsList from "./components/students/StudentsList";
 import TasksDetails from "./components/tasks/TasksDetails";
@@ -18,6 +17,9 @@ import TaskForm from "./components/tasks/TaskForm";
 import TaskDelete from "./components/tasks/TaskDelete";
 import SolutionForm from "./components/solutions/SolutionForm";
 import SolutionDelete from "./components/solutions/SolutionDelete";
+import LoginForm from "./components/login/LoginForm";
+import LoggedIn from "./components/login/LoggedIn";
+import LogOut from "./components/login/Logout";
 
 function App() {
     return (
@@ -40,7 +42,9 @@ function App() {
                         <Route exact path="/students/edit/:studentId" component={StudentForm}/>
                         <Route exact path="/students/details/:studentId" component={StudentDetails}/>
                         <Route exact path="/students/delete/:studentId" component={StudentDelete}/>
-                        <Route path="/" component={MainContent}/>
+                        <Route path="/login" component={LoginForm}/>
+                        <Route path="/logout" component={LogOut}/>
+                        <Route path="/" component={LoggedIn}/>
                     </Switch>
                 </main>
                 <Footer/>

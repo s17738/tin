@@ -1,5 +1,6 @@
 package edu.pjwstk.wpd.api;
 
+import edu.pjwstk.wpd.api.dto.LoginDto;
 import edu.pjwstk.wpd.api.dto.UserDto;
 import edu.pjwstk.wpd.api.dto.UserMapper;
 import edu.pjwstk.wpd.api.dto.UserWithPasswordDto;
@@ -38,7 +39,7 @@ class UserController {
     @GetMapping("/{userId}")
     public UserDto getUser(@PathVariable UUID userId) {
         return userMapper.mapToDto(userRepository.findAggregateById(userId)
-                                                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found")));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found")));
     }
 
     @PostMapping
@@ -64,5 +65,13 @@ class UserController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteUser(@PathVariable UUID userId) {
         userRepository.deleteById(userId);
+    }
+
+    @PostMapping("/login")
+    public UserDto createUser(@Valid @RequestBody LoginDto loginDto) {
+        User user = userRepository.findAggregateByEmailAndPassword(loginDto.getEmail(), loginDto.getPassword())
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found"));
+
+        return userMapper.mapToDto(user);
     }
 }

@@ -33,3 +33,14 @@ export function updateUser(id, user) {
         body: JSON.stringify(user)
     })
 }
+
+export function loginUser(userLogin) {
+    return fetch(baseUrl + '/users/login', {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(userLogin)
+    })
+}
